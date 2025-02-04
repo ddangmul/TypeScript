@@ -25,13 +25,19 @@ let hobbies: string[];
 
 hobbies = ["Sports", "Cooking"];
 
-// 객체 타입(구조)
-// any : 타입스크립트는 특별 구성이 없어도 작동. 기본적으로 변수를 any 타입으로 간주. any는 알려줄 게 없다는 뜻이므로 어떤 유형도 허용. 단, 예비적으로 사용되는 타입이므로 지양하는 게 좋음
-// 객체 타입은 중괄호{}로 지정
-let person: {
+// [타입 별칭 생성]
+// type은 타입스크립트 내장 키워드
+// type 뒤에 원하는 별칭, 등호 다음 원하는 타입 정의
+// 자바스크립트로 컴파일하면 코드에서 사라짐
+type Person = {
   name: string;
   age: number;
 };
+
+// 객체 타입(구조)
+// any : 타입스크립트는 특별 구성이 없어도 작동. 기본적으로 변수를 any 타입으로 간주. any는 알려줄 게 없다는 뜻이므로 어떤 유형도 허용. 단, 예비적으로 사용되는 타입이므로 지양하는 게 좋음
+// 객체 타입은 중괄호{}로 지정
+let person: Person;
 
 person = {
   name: "Max",
@@ -43,10 +49,7 @@ person = {
 // };
 
 // 객체 + 배열 타입
-let people: {
-  name: string;
-  age: number;
-}[];
+let people: Person[];
 
 people = [person, { name: "sue", age: 29 }];
 
@@ -63,3 +66,18 @@ people = [person, { name: "sue", age: 29 }];
 let course: string | number = "React - The Complete Guide";
 
 course = 1234;
+
+// Functions & types
+// 함수를 사용할 때 타입은 매개변수와 반환값에 지정할 수 있다. 즉, 반환값의 타입도 생각해야 한다.
+function add(a: number, b: number): number | string {
+  return a + b; // 함수 타입을 명시하지 않으면 반환값을 number로 타입 추론
+}
+
+// 특별한 반환값 타입 : void
+// 함수에 반환값이 없을 때 사용
+// null 또는 undefined와 비슷하지만, 항상 함수와 결합해서 사용한다.
+function print(value: any) {
+  // 자바스크립트에 내부적으로 정의된 print()는 타입스크립트 내장함수 print()와 충돌할 수 있다.
+  // printOutPut같은 걸로 변경해서 충돌을 피해준다.
+  console.log(value);
+}
