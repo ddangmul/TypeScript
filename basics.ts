@@ -48,3 +48,10 @@ let people: {
 }[];
 
 people = [person, { name: "sue", age: 29 }];
+
+// [타입 추론] 타입스크립트의 핵심 기능
+// 타입스크립트는 명시적인 타입 표시가 없어도 기본적으로 가능한 많은 타입을 유추하려고 함
+// -> 개발자가 작성할 코드 감소하기 때문에, 가능한 타입 추론 사용을 권장
+let course = "React - The Complete Guide"; // 여기서 변수의 타입을 string으로 유추
+
+// course = 12341;  // error! 타입 추론 때문
