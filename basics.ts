@@ -3,6 +3,8 @@
 // arrays, objects
 // Function types, parameters
 
+import { isIdentifierStart } from "typescript";
+
 // 변수명 뒤에 콜론 + 자료형 표기
 // 자료형은 소문자로 시작. 대문자로 시작하면 자바스크립트 객체를 가리킴
 
@@ -67,13 +69,13 @@ let course: string | number = "React - The Complete Guide";
 
 course = 1234;
 
-// Functions & types
+// [Functions & types]
 // 함수를 사용할 때 타입은 매개변수와 반환값에 지정할 수 있다. 즉, 반환값의 타입도 생각해야 한다.
 function add(a: number, b: number): number | string {
   return a + b; // 함수 타입을 명시하지 않으면 반환값을 number로 타입 추론
 }
 
-// 특별한 반환값 타입 : void
+// - 특별한 반환값 타입 : void
 // 함수에 반환값이 없을 때 사용
 // null 또는 undefined와 비슷하지만, 항상 함수와 결합해서 사용한다.
 function print(value: any) {
@@ -81,3 +83,17 @@ function print(value: any) {
   // printOutPut같은 걸로 변경해서 충돌을 피해준다.
   console.log(value);
 }
+
+// [제네릭] <T>
+// 함수를 제네릭 함수로 변경해 함수 실행 시 작성한 인수로 함수의 타입 추론 -> 함수에 타입 안정성과 유연성 제공
+function insertAtBeginning<T>(array: T[], value: T) {
+  const newArray = [value, ...array];
+  return newArray;
+}
+
+const demoArray = [1, 2, 3];
+
+const updatedArray = insertAtBeginning(demoArray, -1); // [-1, 1, 2, 3]
+const stringArray = insertAtBeginning(["a", "b"], "c");
+// const arrays = insertAtBeginning([1, 2], "test"); // error
+// updatedArray[0].splite(""); // error
